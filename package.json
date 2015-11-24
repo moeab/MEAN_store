@@ -1,0 +1,9 @@
+{
+  "name": "mean_store",
+  "description": "MEAN application written from scratch",
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "mongoose": "latest"
+  }
+}

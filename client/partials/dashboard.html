@@ -1,0 +1,31 @@
+<h4>Find a product</h4>
+<input type="text" placeholder="search..." ng-model="product_filter">	
+<div ng-controller="productController" ng-init="more = false">
+	<div id="dashboard_products" ng-class="{ 'showMore': more, 'showLess': !more }">
+		<div class = 'product' ng-repeat="product in products | filter: product_filter | orderBy: 'added_at':true">
+			<img ng-src="{{product.image}}" alt="product">
+			<p ng-bind="product.item"></p>
+			<p ng-bind="'( ' + product.quantity + ' )'"></p>
+		</div>
+	</div>
+	<a id="show_more_prdcts" ng-click='more = !more'>{{ more ? 'Show Less' : 'Show More'}}</a>
+</div>
+	
+<div id="recent" ng-init="more_customers = false" ng-init="more_orders = false">
+	<div ng-controller="orderController" ng-class="{ 'showMore': more_orders, 'showLess': !more_orders }">
+	<h2>Recent Orders</h2>
+		<div id ="recent_orders" ng-repeat="order in order_date | orderBy: 'ordered_at':true" >
+				<p>{{ order.name}} purchased {{order.qty}} {{order.product.item}} (<span am-time-ago='order.ordered_at'></span>)</p>
+		</div>
+	</div>
+	<a id="show_more_orders" ng-click='more_orders = !more_orders'>{{ more_orders ? 'Show Less' : 'Show More'}}</a>
+
+
+	<div ng-controller="customerController" ng-class="{ 'showMore': more_customers, 'showLess': !more_customers }">
+		<h2>New Customers</h2>
+		<div id= "new_customers" ng-repeat="customer in customers | orderBy: 'created_at':true" >
+			<p>{{ customer.name }} joined the store (<span am-time-ago='customer.created_at'></span>)</p>
+		</div>
+	</div>
+	<a id="show_more_customers" ng-click='more_customers = !more_customers'>{{ more_customers ? 'Show Less' : 'Show More'}}</a>
+</div>

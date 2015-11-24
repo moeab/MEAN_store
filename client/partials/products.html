@@ -1,0 +1,25 @@
+<h4 class="top">Find a product</h4>
+<input class="top" type="text" placeholder="search..." ng-model="name_filter">
+<div ng-controller="productController">
+	<div class="search_add">
+		<form>
+			<h4>Add a new product!</h4>
+			<label>Name: <br><input type="text" placeholder="Product name" ng-model="product.item"></label>
+			<label>Image (url): <br><input type="url" placeholder="http://" ng-model="product.image"></label><br>
+			<label>Initial Quantity: <br><input id="qty" type="number" ng-model="product.quantity"></label>
+			<input ng-click="addProduct()" class="btn btn-main" type="submit" value="Create">
+		</form>
+		<div id='errors'>
+			<p ng-bind='errors.item.message'></p>
+			<p ng-bind='errors.quantity.message'></p>
+			<p ng-bind='errors.image.message'></p>
+		</div>
+	</div>
+	<div class="products">
+		<div class="product" ng-repeat="product in products | filter: name_filter">
+			<img ng-src="{{product.image}}" alt="product">
+			<p ng-bind="product.item"></p>
+			<p ng-bind="'( ' + product.quantity + ' )'"></p>
+		</div>
+	</div>
+</div>
